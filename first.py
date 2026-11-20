@@ -1,1 +1,1 @@
-print(jeevan)
+print(jeevanNJ)
