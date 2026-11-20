@@ -1,11 +1,19 @@
+
 pipeline {
     agent any
 
     stages {
+
         stage('Checkout Source Code') {
             steps {
                 echo 'Pulling code from Git repository...'
                 checkout scm
+            }
+        }
+
+        stage('Check Python Installation') {
+            steps {
+                bat 'python --version'
             }
         }
 
@@ -19,7 +27,7 @@ pipeline {
         stage('Code Stability Check') {
             steps {
                 echo 'Verifying pipeline execution...'
-                bat 'echo "Python script executed successfully!"'
+                bat 'echo Python script executed successfully!'
             }
         }
     }
@@ -28,8 +36,13 @@ pipeline {
         success {
             echo 'SUCCESS: CI Pipeline completed successfully!'
         }
+
         failure {
             echo 'FAILURE: Pipeline failed. Check build logs.'
+        }
+
+        always {
+            echo 'Jenkins pipeline execution completed.'
         }
     }
 }
